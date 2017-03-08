@@ -1,0 +1,35 @@
+{
+  "ServerName":"Some.Server:8000",
+  "DataSourceType":"DontKnow",
+  "DataPortNum":"1000",
+  "Domain":"AnyDomain",
+  "ConnectionString":"LetsMakeItDynamic",
+  "DataSourceDefinition":[
+    {
+      "Table1":{
+        "Columns":  [
+        {"headerName": "Transfer Key", "field": "transferSetKey"},
+        {"headerName": "Start Date", "field": "startDate"},
+        {"headerName": "End Date", "field": "endDate"},
+        {"headerName": "Sync EndDate", "field": "syncEndDate"},
+        {"headerName": "Status Reason", "field": "statusReason"},
+        {"headerName": "Silo ID", "field": "siloId"},
+        {"headerName": "Status", "field": "status"},
+        {"headerName": "Create Date", "field": "createDate"},
+        {"headerName": "Created By", "field": "createBy"},
+        {"headerName": "Update Date", "field": "updateDate"},
+        {"headerName": "Updated By", "field": "updateBy"},
+        {"headerName": "Server Name", "field": "serverName"},
+        {"headerName": "Type", "field": "type"},
+        {"headerName": "Supplier", "field": "supplier"},
+        {"headerName": "Retailer", "field": "retailer"},
+        {"headerName": "CurrentFlag", "field": "currentFlag"},
+        {"headerName": "Silo Type", "field": "siloType"},
+        {"headerName": "Current Flag Str", "field": "currentFlagStr"},
+        {"headerName": "Status Duration", "field": "statusDuration"},
+        {"headerName": "Status Duration (MS)", "field": "statusDurationMillis"}],
+        "DataSource":"fileData.json"
+      }
+    }
+  ]
+}

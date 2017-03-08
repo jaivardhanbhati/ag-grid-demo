@@ -1,0 +1,12 @@
+{
+	"DataSourceList": [{
+		"key": "Source1",
+		"value": "DataDefinition1.json"
+	}, {
+		"key": "Source2",
+		"value": "DataDefinition2.json"
+	}, {
+		"key": "Source3",
+		"value": "DataDefinition3.json"
+	}]
+}

@@ -1,0 +1,26 @@
+{
+  "ServerName":"ENGPS100DEV.rsi.corp.local:8000",
+  "DataSourceType":"Vertica",
+  "DataPortNum":"1000",
+  "Domain":"RV-USA",
+  "ConnectionString":"SQL://ENGPS100DEV.rsi.corp.local:8000/rsportal",
+  "DataSourceDefinition":[
+    {
+      "Table1":{
+        "Columns":[
+          {"headerName": "Athlete", "field": "athlete", "width": 100},
+          {"headerName": "Age", "field": "age", "width": 80},
+          {"headerName": "Gold", "field": "gold", "width": 80},
+          {"headerName": "Silver", "field": "silver", "width": 80},
+          {"headerName": "Bronze", "field": "bronze", "width": 80},
+          {"headerName": "Total", "field": "total", "width": 80},
+          {"headerName": "Country", "field": "country", "width": 120, "rowGroupIndex": 0, "group":true},
+          {"headerName": "Year", "field": "year", "width": 90},
+          {"headerName": "Date", "field": "date", "width": 110},
+          {"headerName": "Sport", "field": "sport", "width": 110}
+        ],
+        "DataSource":"olympicWinnersData.json"
+      }
+    }
+  ]
+}

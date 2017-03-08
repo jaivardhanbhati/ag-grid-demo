@@ -1,0 +1,53 @@
+{
+  "name": "ag-grid-react-example",
+  "version": "8.0.0",
+  "description": "Example Reach applicaiton using ag-Grid.",
+  "main": "dist/ag-grid-react-example.js",
+  "scripts": {
+    "standard": "webpack-dev-server --config webpack.config.standard.js --progress --colors --hot --inline",
+    "grouped": "webpack-dev-server --config webpack.config.grouped.js --progress --colors --hot --inline",
+    "large": "webpack-dev-server --config webpack.config.large.js --progress --colors --hot --inline",
+    "clean": "rimraf dist",
+    "build-standard": "npm run clean && webpack --config webpack.config.standard.js --progress --profile --bail --debug"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ceolter/ag-grid-react-example.git"
+  },
+  "keywords": [
+    "react",
+    "grid",
+    "data",
+    "table"
+  ],
+  "author": "Niall Crosby <niall.crosby@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ceolter/ag-grid-react-example/issues"
+  },
+  "homepage": "http://www.ag-grid.com/",
+  "devDependencies": {
+    "babel-core": "^6.0.0",
+    "babel-loader": "6.2.1",
+    "babel-preset-es2015": "6.3.13",
+    "babel-preset-react": "6.3.13",
+    "css-loader": "^0.23.1",
+    "less": "^2.7.2",
+    "less-loader": "^2.2.3",
+    "material-ui": "^0.17.0",
+    "raw-loader": "^0.5.1",
+    "style-loader": "^0.13.0",
+    "webpack": "1.12.11",
+    "webpack-dev-server": "^1.14.1"
+  },
+  "dependencies": {
+    "ag-grid": "8.0.x",
+    "ag-grid-enterprise": "8.0.x",
+    "ag-grid-react": "8.0.x",
+    "lodash": "^4.17.4",
+    "react": "15.4.0",
+    "react-dom": "15.4.0",
+    "react-tap-event-plugin": "2.0.1",
+    "rimraf": "2.5.x"
+  }
+}
