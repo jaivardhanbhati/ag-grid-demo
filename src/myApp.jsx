@@ -278,7 +278,7 @@ export default class MyApp extends React.Component {
                       if (params.data !== undefined) {
                           return params.node.id;
                       } else {
-                          return '<img src="/rsportal/skins/common/images/reload.gif">'
+                          return '<img src="../../images/reload.gif">'
                       }
                 }
                 that.gridOptions.columnDefs = currentTable.Columns;
