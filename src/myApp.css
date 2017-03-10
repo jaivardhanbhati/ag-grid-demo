@@ -15,14 +15,7 @@
     position: relative;
 }
 
-.outer-div {
-  max-width: 1200px;
-  max-height:1000px;
-  overflow:auto;
-}
-
 .lower-div {
-  max-width:1000px;
   max-height:900px;
   margin-top: 20px;
   position: relative;

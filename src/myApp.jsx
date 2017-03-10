@@ -66,6 +66,7 @@ export default class MyApp extends React.Component {
 
         this.allOfTheData = {};
         this.selectedDataSource = {};
+        this.outerWidth = null;
 
         this.gridOptions = {
               quickFilterText: null,
@@ -111,6 +112,7 @@ export default class MyApp extends React.Component {
                   return null;
               }
           };*/
+          console.log('inside constructor');
     }
 
     sortData(sortModel, data) {
@@ -143,6 +145,15 @@ export default class MyApp extends React.Component {
         return resultOfSort;
       };
 
+    calculateTableWidth(){
+      let width = 0;
+      this.gridOptions.columnDefs.forEach(function(col,i){
+          console.log('col',col,i);
+          width += (col.width) ? col.width : 100;
+      });
+      this.outerWidth = width
+    }
+
     filterData(filterModel,data) {
       console.log('inside filterData');
       // var allOfTheData = this.allOfTheData;
@@ -156,7 +167,6 @@ export default class MyApp extends React.Component {
                  var inputSet = (index > 0) ? resultOfFilter : data;
                 for (var i = 0; i < inputSet.length; i++) {
                   var item = inputSet[i];
-                  console.log('KEY - index',key, index);
                   if (filterModel[key] && item[key].toString()) {
                   switch(filterModel[key].type){
                     case "contains" :
@@ -252,8 +262,23 @@ export default class MyApp extends React.Component {
         this.columnApi = params.columnApi;
     }
 
-    addIdColumn() {
+    addIdColumn(currentTable) {
+      currentTable.Columns.unshift({"headerName": "ID", "field": "id", "width": 50});
+      currentTable.Columns[0].cellRenderer = function(params) {
+            if (params.data !== undefined) {
+                return params.node.id;
+            } else {
+                return '<img src="../../images/reload.gif">'
+            }
+      }
+    }
 
+    shouldComponentUpdate(nextProps, nextState){
+      if(nextState.columnDefs) {
+        this.calculateTableWidth();
+        return true;
+      }
+      return false;
     }
 
     onRefreshData(selectedItem) {
@@ -272,15 +297,8 @@ export default class MyApp extends React.Component {
                 var httpResult = JSON.parse(httpRequest.responseText);
                 var dataDef = httpResult.DataSourceDefinition;
                 var currentTable = dataDef[0].Table1;
+                that.addIdColumn(currentTable);
 
-                currentTable.Columns.unshift({"headerName": "ID", "field": "id", "width": 50});
-                currentTable.Columns[0].cellRenderer = function(params) {
-                      if (params.data !== undefined) {
-                          return params.node.id;
-                      } else {
-                          return '<img src="../../images/reload.gif">'
-                      }
-                }
                 that.gridOptions.columnDefs = currentTable.Columns;
                 that.setState({columnDefs:currentTable.Columns});
 
@@ -321,9 +339,20 @@ export default class MyApp extends React.Component {
         };
     }
 
+   componentWillReceiveProps(nextProps){
+     console.log('inside componentWillReceiveProps');
+   }
+
+   componentWillMount(){
+     console.log('inside componentWillMount');
+   }
+
     render() {
+      console.log('inside render');
+      let outerWidth = this.outerWidth;
+      const divStyle = { width: outerWidth + 'px' };
         var gridTemplate = (
-            <div className="ag-fresh">
+            <div className="ag-fresh" style={divStyle}>
                 <AgGridReact
                     // gridOptions is optional - it's possible to provide
                     // all values as React props
@@ -342,7 +371,7 @@ export default class MyApp extends React.Component {
                 />
             </div>
         );
-        return <div className={'outer-div'}>
+        return <div>
           <div className={'upper-div'}>
           <label className={'title'}>Dynamic Data Loader using React and AG-Grid</label>
           <img className={'logo'} src="../../images/newlogo.jpg"/>

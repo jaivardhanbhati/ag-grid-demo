@@ -9,9 +9,9 @@
       "Table1":{
         "Columns":  [
         {"headerName": "Transfer Key", "field": "transferSetKey"},
-        {"headerName": "Start Date", "field": "startDate"},
-        {"headerName": "End Date", "field": "endDate"},
-        {"headerName": "Sync EndDate", "field": "syncEndDate"},
+        {"headerName": "Start Date", "field": "startDate", "width": 100},
+        {"headerName": "End Date", "field": "endDate", "width": 100},
+        {"headerName": "Sync EndDate", "field": "syncEndDate", "width": 100},
         {"headerName": "Status Reason", "field": "statusReason"},
         {"headerName": "Silo ID", "field": "siloId"},
         {"headerName": "Status", "field": "status"},
