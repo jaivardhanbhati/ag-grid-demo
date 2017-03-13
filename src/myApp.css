@@ -8,17 +8,24 @@
   background-color: #e3e7ed !important;
 }
 
+.refresh-button {
+  background: url('/images/refresh.png') left center no-repeat;
+  background-color: #e3e7ed;
+  padding:2px;
+  height:24px;
+  width:24px;
+  margin-left: 12px;
+}
 
-.div-percent-bar {
-    display: inline-block;
-    height: 20px;
-    position: relative;
+#mainBody{
+  overflow: hidden !important;
 }
 
 .lower-div {
-  max-height:900px;
+  height: 75%;
   margin-top: 20px;
   position: relative;
+  width: 98%;
 }
 
 .upper-div {
@@ -46,18 +53,6 @@
   width: 60px;
 }
 
-.div-percent-value {
-    position: absolute;
-    padding-left: 4px;
-    font-weight: bold;
-    font-size: 13px;
-}
-
-.div-outer-div {
-    display: inline-block;
-    height: 100%;
-    width: 100%;
-}
 
 #file-uploader {
   width:400px !important;

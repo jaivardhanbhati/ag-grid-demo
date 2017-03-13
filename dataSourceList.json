@@ -8,5 +8,13 @@
 	}, {
 		"key": "Source3",
 		"value": "DataDefinition3.json"
+	},
+	{
+		"key": "Source4",
+		"value": "DataDefinition3.json"
+	},
+	{
+		"key": "Source5",
+		"value": "DataDefinition3.json"
 	}]
 }

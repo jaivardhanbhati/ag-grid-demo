@@ -2,6 +2,7 @@ import React from "react";
 import {AgGridReact} from "ag-grid-react";
 import ImageCellRenderer from "./imageCellRenderer.jsx";
 import Chooser from "./ChooserComponent.jsx";
+import Refresher from "./RefreshButton.jsx";
 import "./myApp.css";
 import TextField from 'material-ui/TextField';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
@@ -287,6 +288,12 @@ export default class MyApp extends React.Component {
           this.setRowData(this.allOfTheData);
           return;
         }*/
+        if(!selectedItem) {
+          selectedItem = this.selectedItem
+        } else{
+          this.selectedItem = selectedItem;
+        }
+
         var that = this;
         var httpRequest = new XMLHttpRequest();
         httpRequest.open('GET', '/' + selectedItem.value);
@@ -350,7 +357,7 @@ export default class MyApp extends React.Component {
     render() {
       console.log('inside render');
       let outerWidth = this.outerWidth;
-      const divStyle = { width: outerWidth + 'px' };
+      const divStyle = { width: outerWidth + 'px', 'max-width':'100%' };
         var gridTemplate = (
             <div className="ag-fresh" style={divStyle}>
                 <AgGridReact
@@ -372,18 +379,17 @@ export default class MyApp extends React.Component {
             </div>
         );
         return <div>
-          <div className={'upper-div'}>
+        { /* <div className={'upper-div'}>
           <label className={'title'}>Dynamic Data Loader using React and AG-Grid</label>
           <img className={'logo'} src="../../images/newlogo.jpg"/>
           <img className={'react-logo'} src="../../images/reactlogo.svg"/>
           </div>
+        */}
             <div className={'lower-div'}>
-            { this.state.showGrid ? <input type="text" id="quickFilterInput" placeholder="Type text to filter..." onChange={this.onQuickFilterText.bind(this)}/> : null }
-
             <Chooser onSelect={this.onRefreshData.bind(this)}/>
-                <div>
+            <Refresher onSelect={this.onRefreshData.bind(this)}/>
                     { this.state.showGrid ? gridTemplate : null }
-                </div>
+
             </div>
         </div>;
     }

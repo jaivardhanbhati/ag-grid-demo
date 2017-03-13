@@ -45,7 +45,7 @@ export default class ChooserComponent extends React.Component {
     render() {
         //Inlining styles to make simpler the component
         return (
-          <div>
+
           <MuiThemeProvider>
             <AutoComplete
               hintText="Type Source{1} .."
@@ -56,7 +56,7 @@ export default class ChooserComponent extends React.Component {
               dataSourceConfig={this.state.dataSourceConfig}
             />
           </MuiThemeProvider>
-          </div>
+          
 
         );
     }
