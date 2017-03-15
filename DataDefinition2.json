@@ -10,6 +10,7 @@
         "Columns":[
           {"headerName": "#", "colId": "rowNum", "valueGetter": "node.id", "width": 40, "pinned": "left","checkboxSelection": true},
           {"headerName": "Athlete", "field": "athlete", "width": 100},
+          {"headerName": "Gold", "field": "gold", "width": 80},
           {"headerName": "Silver", "field": "silver", "width": 80},
           {"headerName": "Bronze", "field": "bronze", "width": 80},
           {"headerName": "Total", "field": "total", "width": 80},

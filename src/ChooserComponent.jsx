@@ -50,13 +50,13 @@ export default class ChooserComponent extends React.Component {
             <AutoComplete
               hintText="Type Source{1} .."
               dataSource={this.state.dataSource}
-              filter={AutoComplete.noFilter}
+              filter={AutoComplete.caseInsensitiveFilter}
               openOnFocus={true}
               onNewRequest={this.selectItem.bind(this)}
               dataSourceConfig={this.state.dataSourceConfig}
             />
           </MuiThemeProvider>
-          
+
 
         );
     }

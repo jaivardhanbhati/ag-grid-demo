@@ -4,6 +4,7 @@ import ImageCellRenderer from "./imageCellRenderer.jsx";
 import Chooser from "./ChooserComponent.jsx";
 import Refresher from "./RefreshButton.jsx";
 import "./myApp.css";
+import YearFilter from "./YearFilter.jsx";
 import TextField from 'material-ui/TextField';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import _ from "lodash";

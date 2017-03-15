@@ -15,7 +15,7 @@
           {"headerName": "Bronze", "field": "bronze", "width": 80},
           {"headerName": "Total", "field": "total", "width": 80},
           {"headerName": "Country", "field": "country", "width": 120, "rowGroupIndex": 0, "group":true},
-          {"headerName": "Year", "field": "year", "width": 90},
+          {"headerName": "Year", "field": "year", "width": 90, "filter": "YearFilter()"},
           {"headerName": "Date", "field": "date", "width": 110},
           {"headerName": "Sport", "field": "sport", "width": 110}
         ],
