@@ -8,14 +8,14 @@
     {
       "Table1":{
         "Columns":[
-          {"headerName": "Athlete", "field": "athlete", "width": 100},
+          {"headerName": "Athlete", "field": "athlete", "width": 100, "filterFramework" : "YearFilter"},
           {"headerName": "Age", "field": "age", "width": 80},
           {"headerName": "Gold", "field": "gold", "width": 80},
           {"headerName": "Silver", "field": "silver", "width": 80},
           {"headerName": "Bronze", "field": "bronze", "width": 80},
           {"headerName": "Total", "field": "total", "width": 80},
           {"headerName": "Country", "field": "country", "width": 120, "rowGroupIndex": 0, "group":true},
-          {"headerName": "Year", "field": "year", "width": 90, "filter": "YearFilter()"},
+          {"headerName": "Year", "field": "year", "width": 90, "filter": "YearFilter"},
           {"headerName": "Date", "field": "date", "width": 110},
           {"headerName": "Sport", "field": "sport", "width": 110}
         ],

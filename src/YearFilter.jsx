@@ -1,35 +1,56 @@
 import React from 'react';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import AutoComplete from 'material-ui/AutoComplete';
-import injectTapEventPlugin from "react-tap-event-plugin";
 
-injectTapEventPlugin();
 
 export default class YearFilter extends React.Component {
 
     constructor(props) {
         super(props);
-
+        this.state = {
+          dataSource : ['Test1','Test2','Test3','Test4']
+        }
+        console.log('The field for this filter is ' + props.colDef.field);
     }
 
-  selectItem(item,index) {
-    this.props.onSelect(item);
+    selectItem(item,index) {
+      this.props.onSelect(item);
     };
+
+    getModel(){
+      return {
+        dataSource : ['Test1','Test2','Test3','Test4']
+      }
+    }
+
+    setModel(model){
+      this.searchString = "Test";
+      this.setState({
+          dataSource: model.dataSource
+      });
+    }
+
+    // implement the other Filter callbacks
+    isFilterActive(params) {
+      console.log(params);
+        // do some filter logic
+        return true;
+    }
+
+    helloFromYearsFilter() {
+        alert("Hello From The Years Filter!");
+    }
+
+    doesFilterPass(params){
+        console.log(params);
+      return true;
+    }
 
     render() {
         //Inlining styles to make simpler the component
         return (
 
-          <MuiThemeProvider>
-            <AutoComplete
-              hintText="Type Source{1} .."
-              dataSource={this.state.dataSource}
-              filter={AutoComplete.caseInsensitiveFilter}
-              openOnFocus={true}
-              onNewRequest={this.selectItem.bind(this)}
-              dataSourceConfig={this.state.dataSourceConfig}
-            />
-          </MuiThemeProvider>
+          <div style={{textAlign: 'center', background: 'lightgray', width: '100%', display: 'block', borderBottom: '1px solid grey'}}>
+                      <b>Custom Proficiency Filter</b>
+                  </div>
 
 
         );
@@ -110,3 +131,4 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     };
 });
+*/

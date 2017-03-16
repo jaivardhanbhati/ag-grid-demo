@@ -9,39 +9,6 @@ import TextField from 'material-ui/TextField';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import _ from "lodash";
 
-// take this line out if you do not want to use ag-Grid-Enterprise
-/*class FileUploader extends React.Component {
-
-  constructor(props) {
-    super(props);
-  //  console.log('props',props);
-  //  props["fileSelected"] = 'crap.txt';
-
-    handleChange = (event) => {
-      console.log('event',event);
-      this.setState({
-          filename: event.target.files[0].name
-      });
-    };
-  }
-
-  // handleChange(event){
-  //   console.log('event',event);
-  //   this.setState({
-  //       filename: event.target.files[0].name
-  //   });
-  // };
-  //<FileUploader onChange={this.onRefreshData.bind(this)}/> (remember this)
-  render() {
-    return (
-      <div>
-      <MuiThemeProvider>
-      <TextField id="file-uploader" type="file" onChange={this.props.onChange} ref="choosenFile"/>
-      </MuiThemeProvider>
-      </div>
-    );
-  }
-}; */
 
 export default class MyApp extends React.Component {
 
@@ -273,6 +240,14 @@ export default class MyApp extends React.Component {
                 return '<img src="../../images/reload.gif">'
             }
       }
+    this.parseFilters(currentTable);
+      //currentTable.Columns[2].filter= reactFilterFactory(YearFilter);
+    }
+
+    parseFilters(currentTable) {
+      currentTable.Columns.forEach((col,index) => {
+        if(col.filterFramework) currentTable.Columns[index].filterFramework = col["filterFramework"];
+      });
     }
 
     shouldComponentUpdate(nextProps, nextState){
@@ -319,30 +294,6 @@ export default class MyApp extends React.Component {
                           that.setRowData(that.allOfTheData);
                       }
                   }
-
-                //that.setState({rowData:httpResult.Rows});
-                //that.gridOptions.columnApi.getAllGridColumns()[1].cellRenderer.name = "imageCellRenderer";
-                //that.gridOptions.columnApi.getColumnState()[1]['cellRenderer'] = 'imageCellRenderer';
-                /*for(let i = 0;i<httpResult.Columns.length;i++){
-
-                  if(httpResult.Columns[i].cellRenderer) {
-                    console.log(httpResult.Columns[i]);
-                    that.gridOptions.columnApi.setColumnState();
-                  }
-                }*/
-                //
-
-                //that.api.setColumnDefs(httpResult.Columns);
-
-                //let inputState = that.columnApi.getColumnState();
-                //that.columnApi.setColumnState(httpResult.Columns);
-                //that.gridOptions.columnApi.setColumnDefs(httpResult.Columns);
-                //that.api.setRowData(httpResult.Rows);
-                /*httpResult.Columns.forEach((column) => {
-                    that.columnApi.setColumnState(column);
-                });*/
-
-
             }
         };
     }
@@ -358,7 +309,7 @@ export default class MyApp extends React.Component {
     render() {
       console.log('inside render');
       let outerWidth = this.outerWidth;
-      const divStyle = { width: outerWidth + 'px', 'max-width':'100%' };
+      const divStyle = { width: outerWidth + 'px', 'maxWidth':'100%' };
         var gridTemplate = (
             <div className="ag-fresh" style={divStyle}>
                 <AgGridReact
@@ -376,6 +327,8 @@ export default class MyApp extends React.Component {
                     rowData={this.state.rowData}
                     groupHeaders="true"
                     groupUseEntireRow="true"
+                    enableSorting="true"
+                    enableFilter="true"
                 />
             </div>
         );
