@@ -16,3 +16,29 @@ document.addEventListener('DOMContentLoaded', ()=> {
         container
     );
 });
+
+
+// render() {
+//
+//    var options = [];
+//   /* var newoptions = [
+//      { value: 'one', label: 'One' },
+//      { value: 'two', label: 'Two' },
+//      { value: 'three', label: 'Three' },
+//      { value: 'four', label: 'Four' }
+//    ];*/
+//    this.state.dataSource.forEach((text,index) => {
+//      options.push(<option style={{padding:'5px',border: '1px solid grey'}} key={index} value={text}>{text}</option>);
+//    });
+//
+//     //Inlining styles to make simpler the component
+//     return (
+//         <div style={{margin:'10px'}}>
+//             <select style={{border: '1px solid grey'}} id='s' onChange={this.selectOption}>
+//                 {options}
+//                 </select>
+//         </div>
+//
+//
+//     );
+// }

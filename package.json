@@ -47,6 +47,7 @@
     "lodash": "^4.17.4",
     "react": "15.4.0",
     "react-dom": "15.4.0",
+    "react-select": "^1.0.0-rc.3",
     "react-tap-event-plugin": "2.0.1",
     "rimraf": "2.5.x"
   }

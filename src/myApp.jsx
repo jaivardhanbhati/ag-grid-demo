@@ -4,7 +4,7 @@ import ImageCellRenderer from "./imageCellRenderer.jsx";
 import Chooser from "./ChooserComponent.jsx";
 import Refresher from "./RefreshButton.jsx";
 import "./myApp.css";
-import YearFilter from "./YearFilter.jsx";
+import SelectFilter from "./SelectFilter.jsx";
 import TextField from 'material-ui/TextField';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import _ from "lodash";
@@ -81,11 +81,9 @@ export default class MyApp extends React.Component {
                   return null;
               }
           };*/
-          console.log('inside constructor');
     }
 
     sortData(sortModel, data) {
-        console.log('inside sortData');
         var sortPresent = sortModel && sortModel.length > 0;
         if (!sortPresent) {
             return data;
@@ -117,7 +115,6 @@ export default class MyApp extends React.Component {
     calculateTableWidth(){
       let width = 0;
       this.gridOptions.columnDefs.forEach(function(col,i){
-          console.log('col',col,i);
           width += (col.width) ? col.width : 100;
       });
       this.outerWidth = width
@@ -246,7 +243,8 @@ export default class MyApp extends React.Component {
 
     parseFilters(currentTable) {
       currentTable.Columns.forEach((col,index) => {
-        if(col.filterFramework) currentTable.Columns[index].filterFramework = col["filterFramework"];
+        if(col.filterFramework == "AtheleteFilter") currentTable.Columns[index].filterFramework = SelectFilter;
+        console.log('col',col,index);
       });
     }
 

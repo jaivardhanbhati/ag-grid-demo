@@ -1,12 +1,24 @@
 import React from 'react';
+import {List, ListItem} from 'material-ui/List';
+import Subheader from 'material-ui/Subheader';
+import Divider from 'material-ui/Divider';
+import Checkbox from 'material-ui/Checkbox';
 
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
-export default class YearFilter extends React.Component {
+const styles = {
+  root: {
+    display: 'flex',
+    flexWrap: 'wrap',
+  },
+};
+
+export default class SelectFilter extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
-          dataSource : ['Test1','Test2','Test3','Test4']
+          dataSource : null
         }
         console.log('The field for this filter is ' + props.colDef.field);
     }
@@ -44,15 +56,33 @@ export default class YearFilter extends React.Component {
       return true;
     }
 
+    selectOption(event){
+      console.log('select',event);
+      alert('Select ' + event.target.value);
+    }
+
     render() {
+
+       var options = [];
+      /* var newoptions = [
+         { value: 'one', label: 'One' },
+         { value: 'two', label: 'Two' },
+         { value: 'three', label: 'Three' },
+         { value: 'four', label: 'Four' }
+       ];*/
+       this.state.dataSource.forEach((text,index) => {
+         options.push(<ListItem leftCheckbox={<Checkbox />} key={index} primaryText={text}/>);
+       });
+
         //Inlining styles to make simpler the component
         return (
-
-          <div style={{textAlign: 'center', background: 'lightgray', width: '100%', display: 'block', borderBottom: '1px solid grey'}}>
-                      <b>Custom Proficiency Filter</b>
-                  </div>
-
-
+          <MuiThemeProvider>
+            <div>
+              <List onChange={this.selectOption.bind(this,text)}>
+                  {options}
+              </List>
+            </div>
+          </MuiThemeProvider>
         );
     }
 }
