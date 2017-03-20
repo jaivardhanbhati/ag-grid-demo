@@ -5,6 +5,7 @@ import Chooser from "./ChooserComponent.jsx";
 import Refresher from "./RefreshButton.jsx";
 import "./myApp.css";
 import SelectFilter from "./SelectFilter.jsx";
+import SelectCheckBoxFilter from "./SelectCheckBoxFilter.jsx";
 import TextField from 'material-ui/TextField';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import _ from "lodash";
@@ -244,6 +245,7 @@ export default class MyApp extends React.Component {
     parseFilters(currentTable) {
       currentTable.Columns.forEach((col,index) => {
         if(col.filterFramework == "AtheleteFilter") currentTable.Columns[index].filterFramework = SelectFilter;
+        if(col.filterFramework == "SportFilter") currentTable.Columns[index].filterFramework = SelectCheckBoxFilter;
         console.log('col',col,index);
       });
     }
@@ -307,7 +309,7 @@ export default class MyApp extends React.Component {
     render() {
       console.log('inside render');
       let outerWidth = this.outerWidth;
-      const divStyle = { width: outerWidth + 'px', 'maxWidth':'100%' };
+      const divStyle = { width: outerWidth + 'px' };
         var gridTemplate = (
             <div className="ag-fresh" style={divStyle}>
                 <AgGridReact

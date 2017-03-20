@@ -1,10 +1,4 @@
 import React from 'react';
-import {List, ListItem} from 'material-ui/List';
-import Subheader from 'material-ui/Subheader';
-import Divider from 'material-ui/Divider';
-import Checkbox from 'material-ui/Checkbox';
-
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 const styles = {
   root: {
@@ -18,7 +12,7 @@ export default class SelectFilter extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-          dataSource : null
+          dataSource : ['Test1','Test2','Test3','Test4']
         }
         console.log('The field for this filter is ' + props.colDef.field);
     }
@@ -27,18 +21,18 @@ export default class SelectFilter extends React.Component {
       this.props.onSelect(item);
     };
 
-    getModel(){
-      return {
-        dataSource : ['Test1','Test2','Test3','Test4']
-      }
-    }
-
-    setModel(model){
-      this.searchString = "Test";
-      this.setState({
-          dataSource: model.dataSource
-      });
-    }
+    // getModel(){
+    //   return {
+    //     dataSource : ['Test1','Test2','Test3','Test4']
+    //   }
+    // }
+    //
+    // setModel(model){
+    //   this.searchString = "Test";
+    //   this.setState({
+    //       dataSource: model.dataSource
+    //   });
+    // }
 
     // implement the other Filter callbacks
     isFilterActive(params) {
@@ -57,8 +51,8 @@ export default class SelectFilter extends React.Component {
     }
 
     selectOption(event){
-      console.log('select',event);
-      alert('Select ' + event.target.value);
+      console.log('select',event.target.value);
+      //alert('Select ' + event.target.value);
     }
 
     render() {
@@ -71,18 +65,22 @@ export default class SelectFilter extends React.Component {
          { value: 'four', label: 'Four' }
        ];*/
        this.state.dataSource.forEach((text,index) => {
-         options.push(<ListItem leftCheckbox={<Checkbox />} key={index} primaryText={text}/>);
+         options.push(
+
+           <option style={{padding:'5px', border: '1px solid grey',display: 'block'}} key={index} value={text}>{text}</option>
+
+         );
        });
 
         //Inlining styles to make simpler the component
         return (
-          <MuiThemeProvider>
-            <div>
-              <List onChange={this.selectOption.bind(this,text)}>
-                  {options}
-              </List>
+            <div style={{margin:'5px',width:'120%'}}>
+                <select id='s' onChange={this.selectOption} multiple>
+                    {options}
+                    </select>
             </div>
-          </MuiThemeProvider>
+
+
         );
     }
 }
