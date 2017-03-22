@@ -37,6 +37,7 @@ export default class MyApp extends React.Component {
         this.allOfTheData = {};
         this.selectedDataSource = {};
         this.outerWidth = null;
+        this.filterModel = {};
 
         this.gridOptions = {
               quickFilterText: null,
@@ -125,63 +126,113 @@ export default class MyApp extends React.Component {
       console.log('inside filterData');
       // var allOfTheData = this.allOfTheData;
       var filterPresent = filterModel && Object.keys(filterModel).length > 0;
+      /*var filterPresent = false;
+      if(filterModel && Object.keys(filterModel).length > 0) {
+        filterPresent = true;
+        Object.keys(filterModel).forEach((key) => {
+          if(Array.isArray(filterModel[key])) {
+            filterPresent = filterModel[key].length == 0 ? false : true;
+          }
+        });
+      }*/
+
       if (!filterPresent) {
           return data;
       }
 
-      var resultOfFilter = new Set();
-               Object.keys(filterModel).forEach(function(key,index){
-                 var inputSet = (index > 0) ? resultOfFilter : data;
-                for (var i = 0; i < inputSet.length; i++) {
-                  var item = inputSet[i];
-                  if (filterModel[key] && item[key].toString()) {
-                  switch(filterModel[key].type){
-                    case "contains" :
-                    if(item[key].toString().toLocaleLowerCase().indexOf(filterModel[key].filter) > -1) {
-                      resultOfFilter.add(item);
-                    } else {
-                      resultOfFilter.delete(item);
-                    }
-                    break;
-                    case "startsWith" :
-                    if(item[key].toString().toLocaleLowerCase().startsWith(filterModel[key].filter)) {
-                        resultOfFilter.add(item);
-                    } else {
-                      resultOfFilter.delete(item);
-                    }
-                    break;
-                    case "equals" :
-                    if(item[key].toString().toLocaleLowerCase().includes(filterModel[key].filter.trim())) {
-                        resultOfFilter.add(item);
-                    } else {
-                      resultOfFilter.delete(item);
-                    }
-                    break;
-                    case "notEquals" :
-                    if(!item[key].toString().toLocaleLowerCase().includes(filterModel[key].filter.trim())) {
-                        resultOfFilter.add(item);
-                    } else {
-                      resultOfFilter.delete(item);
-                    }
-                    break;
-                    case "endsWith" :
-                    if(_.endsWith(item[key].toString().toLocaleLowerCase(),filterModel[key].filter.toLocaleLowerCase().trim())) {
-                        resultOfFilter.add(item);
-                    } else {
-                      resultOfFilter.delete(item);
-                    }
-                    break;
+
+      var resultOfFilter = [];
+        Object.keys(filterModel).forEach(function(key,index){
+                  var inputSet = [];
+                  // For multi select list option - custom filter
+                  if(Array.isArray(filterModel[key])) {
+                    inputSet = (index > 0) ? Array.from(resultOfFilter) : data;
+                    resultOfFilter = [];
+                    for (let i = 0; i < inputSet.length; i++) {
+                      let item = inputSet[i];
+                      filterModel[key].forEach((filterItem) => {
+                        if(item[key].toString().toLocaleLowerCase().indexOf(filterItem.toLocaleLowerCase()) > -1) {
+                          resultOfFilter.push(item);
+                      }
+                    });
                   }
-              }
-            }
-        })
+                  } else {
+                    inputSet = (index > 0) ? Array.from(resultOfFilter) : data;
+                    resultOfFilter = [];
+                      for (let i = 0; i < inputSet.length; i++) {
+                        let item = inputSet[i];
+                        if (!isNaN(filterModel[key].filter) && item[key]) {
+                        switch(filterModel[key].type){
+                          case "equals" :
+                          if(item[key] == filterModel[key].filter) {
+                            resultOfFilter.push(item);
+                          }
+                          break;
+                          case "lessThan" :
+                          if(item[key] < filterModel[key].filter) {
+                              resultOfFilter.push(item);
+                          }
+                          break;
+                          case "greaterThan" :
+                          if(item[key] > filterModel[key].filter) {
+                              resultOfFilter.push(item);
+                          }
+                          break;
+                          case "lessThanOrEqual" :
+                          if(item[key] <= filterModel[key].filter) {
+                              resultOfFilter.push(item);
+                          }
+                          break;
+                          case "notEqual" :
+                          if(item[key] != filterModel[key].filter) {
+                              resultOfFilter.push(item);
+                          }
+                          break;
+                          case "greaterThanOrEqual" :
+                          if(item[key] >= filterModel[key].filter) {
+                              resultOfFilter.push(item);
+                          }
+                          break;
+                        }
+                      }
+                      if (isNaN(filterModel[key].filter) && item[key].toString()) {
+                        switch(filterModel[key].type){
+                          case "contains" :
+                          if(item[key].toString().toLocaleLowerCase().indexOf(filterModel[key].filter.toLocaleLowerCase()) > -1) {
+                            resultOfFilter.push(item);
+                          }
+                          break;
+                          case "startsWith" :
+                          if(item[key].toString().toLocaleLowerCase().startsWith(filterModel[key].filter.toLocaleLowerCase())) {
+                              resultOfFilter.push(item);
+                          }
+                          break;
+                          case "equals" :
+                          if(item[key].toString().toLocaleLowerCase().includes(filterModel[key].filter.trim().toLocaleLowerCase())) {
+                              resultOfFilter.push(item);
+                          }
+                          break;
+                          case "notEquals" :
+                          if(!item[key].toString().toLocaleLowerCase().includes(filterModel[key].filter.trim().toLocaleLowerCase())) {
+                              resultOfFilter.push(item);
+                          }
+                          break;
+                          case "endsWith" :
+                          if(_.endsWith(item[key].toString().toLocaleLowerCase(),filterModel[key].filter.toLocaleLowerCase().trim().toLocaleLowerCase())) {
+                              resultOfFilter.push(item);
+                          }
+                          break;
+                        }
+                    }
+                  }
+                }
+              });
       return Array.from(resultOfFilter);
     };
 
     sortAndFilter(sortModel, filterModel,allOfTheData) {
       return this.sortData(sortModel, this.filterData(filterModel,allOfTheData));
     };
-
 
     setRowData(allOfTheData) {
       var that = this;
@@ -243,11 +294,12 @@ export default class MyApp extends React.Component {
     }
 
     parseFilters(currentTable) {
+      let that = this;
       currentTable.Columns.forEach((col,index) => {
-        if(col.filterFramework == "AtheleteFilter") currentTable.Columns[index].filterFramework = SelectFilter;
-        if(col.filterFramework == "SportFilter") currentTable.Columns[index].filterFramework = SelectCheckBoxFilter;
-        console.log('col',col,index);
+        if(col.filterFramework == "SelectFilter") currentTable.Columns[index].filterFramework = SelectFilter;
+        if(col.filterFramework == "SelectCheckBoxFilter") currentTable.Columns[index].filterFramework = SelectCheckBoxFilter;
       });
+
     }
 
     shouldComponentUpdate(nextProps, nextState){
@@ -259,11 +311,6 @@ export default class MyApp extends React.Component {
     }
 
     onRefreshData(selectedItem) {
-
-        /*if(Object.values(this.allOfTheData).length > 0) {
-          this.setRowData(this.allOfTheData);
-          return;
-        }*/
         if(!selectedItem) {
           selectedItem = this.selectedItem
         } else{

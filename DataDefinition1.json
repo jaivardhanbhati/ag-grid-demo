@@ -8,16 +8,16 @@
     {
       "Table1":{
         "Columns":[
-          {"headerName": "Athlete", "field": "athlete", "width": 100, "filterFramework" : "AtheleteFilter"},
-          {"headerName": "Age", "field": "age", "width": 80},
-          {"headerName": "Gold", "field": "gold", "width": 80},
-          {"headerName": "Silver", "field": "silver", "width": 80},
+          {"headerName": "Athlete", "field": "athlete", "width": 100, "filterFramework" : "SelectCheckBoxFilter", "keywords":["Oliver","Michael","Ryan","Nastia"]},
+          {"headerName": "Age", "field": "age", "width": 80, "filter": "number"},
+          {"headerName": "Gold", "field": "gold", "width": 80, "suppressFilter": true},
+          {"headerName": "Silver", "field": "silver", "width": 80, "suppressFilter": true},
           {"headerName": "Bronze", "field": "bronze", "width": 80},
-          {"headerName": "Total", "field": "total", "width": 80},
-          {"headerName": "Country", "field": "country", "width": 120, "rowGroupIndex": 0, "group":true},
-          {"headerName": "Year", "field": "year", "width": 90, "filter": "YearFilter"},
+          {"headerName": "Total", "field": "total", "width": 80,"filter": "number"},
+          {"headerName": "Country", "field": "country", "width": 120},
+          {"headerName": "Year", "field": "year", "width": 90, "filter": "number"},
           {"headerName": "Date", "field": "date", "width": 110},
-          {"headerName": "Sport", "field": "sport", "filterFramework": "SportFilter"}
+          {"headerName": "Sport", "field": "sport", "filterFramework" : "SelectCheckBoxFilter", "keywords":["Athletics","Swimming","Dancing","Golf","Tennis","Gymnastics","Diving","Cycling"]}
         ],
         "DataSource":"olympicWinnersData.json"
       }

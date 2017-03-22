@@ -20,13 +20,12 @@
 .multiselect {
     width:10em;
     margin-bottom: 2px;
-    border:solid 1px #c0c0c0;
     overflow:auto;
 }
 
 .multiselect .checked {
     color:#ffffff;
-    background-color:#000099;
+    background-color:#00E5FF;
 }
 
 .multiselect legend {
@@ -36,7 +35,7 @@
 input[type=checkbox]:checked + label {
   color: #f00;
   font-style: normal;
-} 
+}
 
 #mainBody{
   overflow: hidden !important;

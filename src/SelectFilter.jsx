@@ -11,8 +11,9 @@ export default class SelectFilter extends React.Component {
 
     constructor(props) {
         super(props);
+        this.props = props;
         this.state = {
-          dataSource : ['Test1','Test2','Test3','Test4']
+          dataSource : this.props.colDef.keywords
         }
         console.log('The field for this filter is ' + props.colDef.field);
     }
@@ -21,28 +22,21 @@ export default class SelectFilter extends React.Component {
       this.props.onSelect(item);
     };
 
-    // getModel(){
-    //   return {
-    //     dataSource : ['Test1','Test2','Test3','Test4']
-    //   }
-    // }
-    //
-    // setModel(model){
-    //   this.searchString = "Test";
-    //   this.setState({
-    //       dataSource: model.dataSource
-    //   });
-    // }
+    getModel(){
+      return this.state.dataSource;
+    }
+
+    setModel(model){
+      this.setState({
+          dataSource: model.dataSource
+      });
+    }
 
     // implement the other Filter callbacks
     isFilterActive(params) {
       console.log(params);
         // do some filter logic
         return true;
-    }
-
-    helloFromYearsFilter() {
-        alert("Hello From The Years Filter!");
     }
 
     doesFilterPass(params){
