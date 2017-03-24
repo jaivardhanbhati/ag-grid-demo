@@ -7,7 +7,13 @@
 .ag-row-odd{
   background-color: #e3e7ed !important;
 }
-
+.ag-fresh{
+  max-width: 1200px;
+}
+.autoComplete{
+  margin-left: 1px;
+  border: none;
+}
 .refresh-button {
   background: url('/images/refresh.png') left center no-repeat;
   background-color: #e3e7ed;

@@ -17,7 +17,7 @@
           {"headerName": "Country", "field": "country", "width": 120},
           {"headerName": "Year", "field": "year", "width": 90, "filter": "number"},
           {"headerName": "Date", "field": "date", "width": 110},
-          {"headerName": "Sport", "field": "sport", "filterFramework" : "SelectCheckBoxFilter", "keywords":["Athletics","Swimming","Dancing","Golf","Tennis","Gymnastics","Diving","Cycling"]}
+          {"headerName": "Sport", "field": "sport", "filterFramework" : "SuggestionsFilter", "keywords":["Athletics","Swimming","Dancing","Golf","Tennis","Gymnastics","Diving","Cycling"]}
         ],
         "DataSource":"olympicWinnersData.json"
       }

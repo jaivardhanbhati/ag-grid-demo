@@ -4,11 +4,10 @@ import ImageCellRenderer from "./imageCellRenderer.jsx";
 import Chooser from "./ChooserComponent.jsx";
 import Refresher from "./RefreshButton.jsx";
 import "./myApp.css";
-import SelectFilter from "./SelectFilter.jsx";
+import SuggestionsFilter from "./SuggestionsFilter.jsx";
 import SelectCheckBoxFilter from "./SelectCheckBoxFilter.jsx";
 import TextField from 'material-ui/TextField';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import _ from "lodash";
 
 
 export default class MyApp extends React.Component {
@@ -21,17 +20,7 @@ export default class MyApp extends React.Component {
             showToolPanel: true,
             columnDefs: null,
             rowData: null,
-            quickFilterText: null,
-            icons: {
-                columnRemoveFromGroup: '<i class="fa fa-remove"/>',
-                filter: '<i class="fa fa-filter"/>',
-                sortAscending: '<i class="fa fa-long-arrow-down"/>',
-                sortDescending: '<i class="fa fa-long-arrow-up"/>',
-                groupExpanded: '<i class="fa fa-minus-square-o"/>',
-                groupContracted: '<i class="fa fa-plus-square-o"/>',
-                columnGroupOpened: '<i class="fa fa-minus-square-o"/>',
-                columnGroupClosed: '<i class="fa fa-plus-square-o"/>'
-            }
+            quickFilterText: null
         };
 
         this.allOfTheData = {};
@@ -70,19 +59,6 @@ export default class MyApp extends React.Component {
                 return item.id;
               }
             };
-
-          /*this.imageCellRenderer = (params) => {
-              if (params.value) {
-                  // var flag = "<img border='0' width='15' height='10' " +
-                  //     "style='margin-bottom: 2px' src='http://flags.fmcdn.net/data/flags/mini/"
-                  //     + RefData.COUNTRY_CODES[params.value] + ".png'>";
-                  //
-                  // return flag + " " + params.value;
-                  return "<img border='0' width='15' height='10' style='margin-bottom: 2px' src="+params.value+"/>"
-              } else {
-                  return null;
-              }
-          };*/
     }
 
     sortData(sortModel, data) {
@@ -117,7 +93,7 @@ export default class MyApp extends React.Component {
     calculateTableWidth(){
       let width = 0;
       this.gridOptions.columnDefs.forEach(function(col,i){
-          width += (col.width) ? col.width : 100;
+        if(!col.hide) width += (col.width) ? col.width : 100;
       });
       this.outerWidth = width
     }
@@ -218,7 +194,7 @@ export default class MyApp extends React.Component {
                           }
                           break;
                           case "endsWith" :
-                          if(_.endsWith(item[key].toString().toLocaleLowerCase(),filterModel[key].filter.toLocaleLowerCase().trim().toLocaleLowerCase())) {
+                          if(item[key].toString().toLocaleLowerCase().endsWith(filterModel[key].filter.trim().toLocaleLowerCase())) {
                               resultOfFilter.push(item);
                           }
                           break;
@@ -281,7 +257,7 @@ export default class MyApp extends React.Component {
     }
 
     addIdColumn(currentTable) {
-      currentTable.Columns.unshift({"headerName": "ID", "field": "id", "width": 50});
+      currentTable.Columns.unshift({"headerName": "ID", "field": "id", "width": 50,"hide":true});
       currentTable.Columns[0].cellRenderer = function(params) {
             if (params.data !== undefined) {
                 return params.node.id;
@@ -296,7 +272,7 @@ export default class MyApp extends React.Component {
     parseFilters(currentTable) {
       let that = this;
       currentTable.Columns.forEach((col,index) => {
-        if(col.filterFramework == "SelectFilter") currentTable.Columns[index].filterFramework = SelectFilter;
+        if(col.filterFramework == "SuggestionsFilter") currentTable.Columns[index].filterFramework = SuggestionsFilter;
         if(col.filterFramework == "SelectCheckBoxFilter") currentTable.Columns[index].filterFramework = SelectCheckBoxFilter;
       });
 
@@ -356,7 +332,7 @@ export default class MyApp extends React.Component {
     render() {
       console.log('inside render');
       let outerWidth = this.outerWidth;
-      const divStyle = { width: outerWidth + 'px' };
+      const divStyle = { width: outerWidth + 'px','text-overflow': 'ellipsis' };
         var gridTemplate = (
             <div className="ag-fresh" style={divStyle}>
                 <AgGridReact
@@ -394,12 +370,4 @@ export default class MyApp extends React.Component {
             </div>
         </div>;
     }
-
 }
-
-function imageCellRenderer(params) {
-   var cellTemplate = (
-     <img border='0' width='15' height='10' style='margin-bottom: 2px' src={params.value}/>
-   );
-   return cellTemplate;
- }

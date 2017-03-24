@@ -16,14 +16,17 @@ export default class ChooserComponent extends React.Component {
 
         this.state = {
            dataSource: [],
-          // selectedSource: null,
            dataSourceConfig : {
              text: 'key',
              value: 'value',
            }
         }
 
-        this.getValues();
+        if(!props.values) {
+          this.getValues();
+        } else {
+          this.state.dataSource = props.values;
+        }
     }
 
     getValues() {
@@ -47,8 +50,8 @@ export default class ChooserComponent extends React.Component {
         return (
 
           <MuiThemeProvider>
-            <AutoComplete
-              hintText="Type Source{1} .."
+            <AutoComplete className="autoComplete"
+              hintText="Type your Selection"
               dataSource={this.state.dataSource}
               filter={AutoComplete.caseInsensitiveFilter}
               openOnFocus={true}
