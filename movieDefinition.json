@@ -1,0 +1,19 @@
+{
+  "ServerName":"Some.Server:8000",
+  "DataSourceType":"DontKnow",
+  "DataPortNum":"1000",
+  "Domain":"AnyDomain",
+  "ConnectionString":"LetsMakeItDynamic",
+  "DataSourceDefinition":[
+    {
+      "Table1":{
+        "Columns":  [
+        {"headerName": "Movie Name", "field": "name"},
+        {"headerName": "Director Name", "field": "director", "width": 150},
+        {"headerName": "Lead Actor", "field": "leadactor"},
+        {"headerName": "Rating", "field": "rating", "width": 100, "filter" : "number"}],
+        "DataSource":"movies.json"
+      }
+    }
+  ]
+}

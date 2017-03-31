@@ -1,4 +1,6 @@
 import React from "react";
+/*import {BrowserRouter as Router, Route } from "react-router-dom";*/
+/*import { Router, Route, hashHistory  } from 'react-router';*/
 import {AgGridReact} from "ag-grid-react";
 import ImageCellRenderer from "./imageCellRenderer.jsx";
 import Chooser from "./ChooserComponent.jsx";
@@ -93,13 +95,12 @@ export default class MyApp extends React.Component {
     calculateTableWidth(){
       let width = 0;
       this.gridOptions.columnDefs.forEach(function(col,i){
-        if(!col.hide) width += (col.width) ? col.width : 100;
+        if(!col.hide) width += (col.width) ? col.width : 200;
       });
       this.outerWidth = width
     }
 
     filterData(filterModel,data) {
-      console.log('inside filterData');
       // var allOfTheData = this.allOfTheData;
       var filterPresent = filterModel && Object.keys(filterModel).length > 0;
       /*var filterPresent = false;
@@ -266,12 +267,16 @@ export default class MyApp extends React.Component {
             }
       }
     this.parseFilters(currentTable);
-      //currentTable.Columns[2].filter= reactFilterFactory(YearFilter);
     }
+
 
     parseFilters(currentTable) {
       let that = this;
       currentTable.Columns.forEach((col,index) => {
+        if(col.type == "Link") currentTable.Columns[index].cellRenderer = function(params) {
+          console.dir('Params',params);
+          if (params.data !== undefined) return '<a href="/#/details/">'+ params.value +'</a>';
+        }
         if(col.filterFramework == "SuggestionsFilter") currentTable.Columns[index].filterFramework = SuggestionsFilter;
         if(col.filterFramework == "SelectCheckBoxFilter") currentTable.Columns[index].filterFramework = SelectCheckBoxFilter;
       });
@@ -289,6 +294,7 @@ export default class MyApp extends React.Component {
     onRefreshData(selectedItem) {
         if(!selectedItem) {
           selectedItem = this.selectedItem
+          if(!selectedItem.value) alert('Please choose value from the options and hit enter')
         } else{
           this.selectedItem = selectedItem;
         }
@@ -330,9 +336,8 @@ export default class MyApp extends React.Component {
    }
 
     render() {
-      console.log('inside render');
       let outerWidth = this.outerWidth;
-      const divStyle = { width: outerWidth + 'px','text-overflow': 'ellipsis' };
+      const divStyle = { width: outerWidth + 'px','textOverflow': 'ellipsis' };
         var gridTemplate = (
             <div className="ag-fresh" style={divStyle}>
                 <AgGridReact
@@ -362,12 +367,11 @@ export default class MyApp extends React.Component {
           <img className={'react-logo'} src="../../images/reactlogo.svg"/>
           </div>
         */}
-            <div className={'lower-div'}>
+          <div className={'lower-div'}>
             <Chooser onSelect={this.onRefreshData.bind(this)}/>
             <Refresher onSelect={this.onRefreshData.bind(this)}/>
-                    { this.state.showGrid ? gridTemplate : null }
-
-            </div>
+                      { this.state.showGrid ? gridTemplate : null }
+          </div>
         </div>;
     }
 }

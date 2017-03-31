@@ -1,0 +1,26 @@
+{
+  "ServerName":"Some.Server:8100",
+  "DataSourceType":"DontKnow",
+  "DataPortNum":"1000",
+  "Domain":"AnyDomain",
+  "ConnectionString":"LetsMakeItDynamic",
+  "DataSourceDefinition":[
+    {
+      "Table1":{
+        "Columns":  [
+        {"headerName": "Silo Id", "field": "SiloId", "type":"Link"},
+        {"headerName": "Silo Name", "field": "DisplayName", "width": 150},
+        {"headerName": "Vendor Name", "field": "VENDOR_NAME"},
+        {"headerName": "Retailer Name", "field": "RETAILER_NAME", "width": 100, "filter" : "number"},
+        {"headerName": "Type", "field": "type", "width": 100, "filter" : "number"},
+        {"headerName": "URL", "field": "URL", "width": 400},
+        {"headerName": "IIS SERVER URL", "field": "IIS_SERVER_URL", "width": 100},
+        {"headerName": "CUBE_NAME", "field": "CUBE_NAME", "width": 100},
+        {"headerName": "DB SERVER NAME", "field": "DB_SERVERNAME", "width": 100},
+        {"headerName": "Advanced Metrics enabled", "field": "ADV_MATRICS_ENABLED", "width": 100, "filter" : "number"}
+        ],
+        "DataSource":"silo.json"
+      }
+    }
+  ]
+}

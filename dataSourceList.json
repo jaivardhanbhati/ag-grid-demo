@@ -10,11 +10,11 @@
 		"value": "DataDefinition3.json"
 	},
 	{
-		"key": "Jai4",
-		"value": "DataDefinition3.json"
+		"key": "movies",
+		"value": "movieDefinition.json"
 	},
 	{
-		"key": "Key5",
-		"value": "DataDefinition3.json"
+		"key": "silo",
+		"value": "siloDefinition.json"
 	}]
 }

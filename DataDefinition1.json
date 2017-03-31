@@ -8,7 +8,7 @@
     {
       "Table1":{
         "Columns":[
-          {"headerName": "Athlete", "field": "athlete", "width": 100, "filterFramework" : "SelectCheckBoxFilter", "keywords":["Oliver","Michael","Ryan","Nastia"]},
+          {"headerName": "Athlete", "field": "athlete", "width": 100, "type":"Link", "filterFramework" : "SelectCheckBoxFilter", "keywords":["Oliver","Michael","Ryan","Nastia"]},
           {"headerName": "Age", "field": "age", "width": 80, "filter": "number"},
           {"headerName": "Gold", "field": "gold", "width": 80, "suppressFilter": true},
           {"headerName": "Silver", "field": "silver", "width": 80, "suppressFilter": true},
