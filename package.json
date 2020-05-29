@@ -41,7 +41,7 @@
     "webpack-dev-server": "^1.14.1"
   },
   "dependencies": {
-    "ag-grid": "8.0.x",
+    "ag-grid": "8.2.0",
     "ag-grid-enterprise": "8.0.x",
     "ag-grid-react": "8.0.x",
     "lodash": "^4.17.4",
