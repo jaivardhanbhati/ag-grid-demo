@@ -45,8 +45,8 @@
     "ag-grid-enterprise": "8.0.x",
     "ag-grid-react": "8.0.x",
     "lodash": "^4.17.4",
-    "react": "15.4.0",
-    "react-dom": "15.4.0",
+    "react": "15.6.2",
+    "react-dom": "15.6.2",
     "react-tap-event-plugin": "2.0.1",
     "rimraf": "2.5.x"
   }
