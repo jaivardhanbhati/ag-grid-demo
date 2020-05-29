@@ -48,6 +48,6 @@
     "react": "15.4.0",
     "react-dom": "15.4.0",
     "react-tap-event-plugin": "2.0.1",
-    "rimraf": "2.5.x"
+    "rimraf": "2.7.1"
   }
 }
